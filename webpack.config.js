@@ -34,11 +34,14 @@ module.exports = {
   ],
   devServer: {
     historyApiFallback: true,
+    host: "0.0.0.0",
+    port: 8080,
+    disableHostCheck: true,
   },
   externals: {
     // global app config object
     config: JSON.stringify({
-      apiUrl: "http://localhost:4001",
+      apiUrl: "http://localhost:5000",
     }),
   },
 };
