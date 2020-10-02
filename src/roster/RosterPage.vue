@@ -1,7 +1,27 @@
 <template>
   <div>
     <b-tabs content-class="mt-3">
-      <b-tab title="花名册" active>
+      <b-tab active title="花名册">
+        <div
+          id="my-table"
+          v-for="(data, index) in share_items"
+          v-bind:key="index"
+          style="margin: 0 auto"
+        >
+          <b-card
+            tag="article"
+            class="mb-2"
+            :img-src="'/static/' + data.id + '.jpg'"
+            img-alt="Image"
+            img-top
+          >
+            <b-card-title>姓名：{{ data.name }} </b-card-title>
+            <b-card-title>学号：{{ data.code }}</b-card-title>
+            <!-- <b-card-text>学号：{{ data.code }} </b-card-text> -->
+          </b-card>
+        </div>
+      </b-tab>
+      <!-- <b-tab title="花名册">
         <b-table
           striped
           hover
@@ -14,11 +34,15 @@
           <template v-slot:cell(id)="row">
             <b class="text-info" :id="'row' + row.item.id">{{ row.item.id }}</b>
             <b-tooltip :target="'row' + row.item.id" variant="danger">
-              <b-img :src="'/static/'+row.item.id+'.jpg'" fluid alt="Responsive image"></b-img>
-              </b-tooltip>
+              <b-img
+                :src="'/static/' + row.item.id + '.jpg'"
+                fluid
+                alt="Responsive image"
+              ></b-img>
+            </b-tooltip>
           </template>
         </b-table>
-      </b-tab>
+      </b-tab> -->
       <b-tab title="课程表">
         <b-img src="/static/class.jpg" fluid alt="Responsive image"></b-img>
       </b-tab>
