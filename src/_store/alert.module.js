@@ -45,4 +45,5 @@ export const alert = {
   state,
   actions,
   mutations,
+  getters,
 };
