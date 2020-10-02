@@ -3,6 +3,13 @@
     <b-container class="container-fluid">
       <b-row>
         <div class="col-sm-12">
+          <div class="page" v-if="getSpinner">
+            <b-spinner
+              class="spinner"
+              :variant="'primary'"
+              :key="'primary'"
+            ></b-spinner>
+          </div>
           <div v-if="alert.message" :class="`alert ${alert.type}`">
             {{ alert.message }}
           </div>
@@ -14,7 +21,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   name: "app",
@@ -22,6 +29,7 @@ export default {
     ...mapState({
       alert: (state) => state.alert,
     }),
+    ...mapGetters("alert", ["getSpinner"]),
   },
   methods: {
     ...mapActions({

@@ -66,6 +66,8 @@
 <script>
 import config from "config";
 import { rosterService } from "../_services";
+import { mapState, mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -99,13 +101,16 @@ export default {
     };
   },
   mounted() {
+    this.SET_SPINNER(true);
     this.getall();
   },
   methods: {
+    ...mapMutations("alert", ["SET_SPINNER"]),
     getall() {
       rosterService.getAll().then((data) => {
         console.log(data);
         this.share_items = data;
+        this.SET_SPINNER(false);
       });
     },
   },
