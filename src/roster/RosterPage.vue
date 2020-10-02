@@ -12,7 +12,7 @@
             tag="article"
             class="mb-2"
             :img-src="'/static/' + data.id + '.jpg'"
-            img-alt="Image"
+            img-alt="缺少图片"
             img-top
           >
             <b-card-title>姓名：{{ data.name }} </b-card-title>
