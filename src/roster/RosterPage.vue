@@ -1,21 +1,28 @@
 <template>
   <div>
-    <b-table
-      striped
-      hover
-      :items="share_items"
-      :fields="fields"
-      table-class="text-nowrap"
-      responsive
-    >
-      <template v-slot:cell(index)="row">{{ row.index + 1 }}</template>
-      <template v-slot:cell(id)="row">
-        <b class="text-info" :id="'row' + row.item.id">{{ row.item.id }}</b>
-        <b-tooltip :target="'row' + row.item.id" variant="danger">{{
-          row.item.comment
-        }}</b-tooltip>
-      </template>
-    </b-table>
+    <b-tabs content-class="mt-3">
+      <b-tab title="花名册" active>
+        <b-table
+          striped
+          hover
+          :items="share_items"
+          :fields="fields"
+          table-class="text-nowrap"
+          responsive
+        >
+          <template v-slot:cell(index)="row">{{ row.index + 1 }}</template>
+          <template v-slot:cell(id)="row">
+            <b class="text-info" :id="'row' + row.item.id">{{ row.item.id }}</b>
+            <b-tooltip :target="'row' + row.item.id" variant="danger">
+              <b-img :src="'/static/'+row.item.id+'.jpg'" fluid alt="Responsive image"></b-img>
+              </b-tooltip>
+          </template>
+        </b-table>
+      </b-tab>
+      <b-tab title="课程表">
+        <b-img src="/static/class.jpg" fluid alt="Responsive image"></b-img>
+      </b-tab>
+    </b-tabs>
   </div>
 </template>
 <script>
