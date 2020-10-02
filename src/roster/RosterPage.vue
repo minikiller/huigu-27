@@ -2,24 +2,38 @@
   <div>
     <b-tabs content-class="mt-3">
       <b-tab active title="花名册">
-        <div
-          id="my-table"
-          v-for="(data, index) in share_items"
-          v-bind:key="index"
-          style="margin: 0 auto"
-        >
-          <b-card
-            tag="article"
-            class="mb-2"
-            :img-src="'/static/' + data.id + '.jpg'"
-            img-alt="缺少图片"
-            img-top
+        <b-row>
+          <div
+            id="my-card"
+            v-for="(data, index) in share_items"
+            v-bind:key="index"
+            style="margin: 0 auto"
           >
-            <b-card-title>姓名：{{ data.name }} </b-card-title>
-            <b-card-title>学号：{{ data.code }}</b-card-title>
-            <!-- <b-card-text>学号：{{ data.code }} </b-card-text> -->
-          </b-card>
-        </div>
+            <b-col>
+              <b-card
+                tag="article"
+                style="max-width: 20rem"
+                class="mb-2"
+                img-alt="缺少图片"
+                img-top
+              >
+                <b-card-title>
+                  <b-avatar
+                    variant="info"
+                    :src="'/static/' + data.id + '.jpg'"
+                  ></b-avatar
+                  >&nbsp姓名：{{ data.name }}
+                </b-card-title>
+                <b-card-title
+                  >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp学号：{{
+                    data.code
+                  }}</b-card-title
+                >
+                <b-card-text> </b-card-text>
+              </b-card>
+            </b-col>
+          </div>
+        </b-row>
       </b-tab>
       <!-- <b-tab title="花名册">
         <b-table
