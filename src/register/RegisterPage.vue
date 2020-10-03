@@ -5,52 +5,43 @@
       <div class="form-group">
         <b-form-input
           type="text"
-          v-model="user.name"
+          v-model="user.fullname"
           v-validate="'required'"
-          name="name"
+          name="fullname"
           placeholder="真实姓名"
           class="form-control"
           :class="{ 'is-invalid': submitted && errors.has('name') }"
         />
-        <div
-          v-if="submitted && errors.has('name')"
-          class="invalid-feedback"
-        >
-          {{ errors.first("name") }}
+        <div v-if="submitted && errors.has('name')" class="invalid-feedback">
+          {{ errors.first("fullname") }}
         </div>
       </div>
       <div class="form-group">
         <input
           type="text"
-          v-model="user.childName"
+          v-model="user.roster"
           v-validate="'required'"
-          name="childName"
+          name="roster"
           placeholder="子女姓名"
           class="form-control"
-          :class="{ 'is-invalid': submitted && errors.has('childName') }"
+          :class="{ 'is-invalid': submitted && errors.has('roster') }"
         />
-        <div
-          v-if="submitted && errors.has('childName')"
-          class="invalid-feedback"
-        >
-          {{ errors.first("childName") }}
+        <div v-if="submitted && errors.has('roster')" class="invalid-feedback">
+          {{ errors.first("roster") }}
         </div>
       </div>
       <div class="form-group">
         <b-form-input
           type="text"
-          v-model="user.username"
+          v-model="user.name"
           v-validate="'required'"
-          name="username"
+          name="name"
           placeholder="登陆名称"
           class="form-control"
-          :class="{ 'is-invalid': submitted && errors.has('username') }"
+          :class="{ 'is-invalid': submitted && errors.has('name') }"
         />
-        <div
-          v-if="submitted && errors.has('username')"
-          class="invalid-feedback"
-        >
-          {{ errors.first("username") }}
+        <div v-if="submitted && errors.has('name')" class="invalid-feedback">
+          {{ errors.first("name") }}
         </div>
       </div>
       <div class="form-group">
@@ -71,19 +62,19 @@
         </div>
       </div>
       <div class="form-group">
-          <label htmlFor="some-radios">关系:</label>
-          <b-form-radio-group
-            id="radio-group-2"
-            v-model="selected"
-            name="radio-sub-component"
+        <label htmlFor="some-radios">关系:</label>
+        <b-form-radio-group
+          id="radio-group-2"
+          v-model="user.parent"
+          name="radio-sub-component"
+        >
+          <b-form-radio v-model="selected" name="some-radios" value="father"
+            >父亲</b-form-radio
           >
-            <b-form-radio v-model="selected" name="some-radios" value="father"
-              >父亲</b-form-radio
-            >
-            <b-form-radio v-model="selected" name="some-radios" value="mother"
-              >母亲</b-form-radio
-            >
-          </b-form-radio-group>
+          <b-form-radio v-model="selected" name="some-radios" value="mother"
+            >母亲</b-form-radio
+          >
+        </b-form-radio-group>
       </div>
       <div class="form-group">
         <button class="btn btn-primary" :disabled="status.registering">
@@ -107,9 +98,10 @@ export default {
     return {
       user: {
         name: "",
-        childName: "",
-        username: "",
+        roster: "",
+        fullname: "",
         password: "",
+        parent: "father",
       },
       submitted: false,
     };
