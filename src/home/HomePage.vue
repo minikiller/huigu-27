@@ -1,42 +1,78 @@
 <template>
+  <div>
     <div>
-        <h1>Hi {{account.user.firstName}}!</h1>
-        <p>You're logged in with Vue + Vuex & JWT!!</p>
-        <h3>Users from secure api end point:</h3>
-        <em v-if="users.loading">Loading users...</em>
-        <span v-if="users.error" class="text-danger">ERROR: {{users.error}}</span>
-        <ul v-if="users.items">
-            <li v-for="user in users.items" :key="user.id">
-                {{user.firstName + ' ' + user.lastName}}
-                <span v-if="user.deleting"><em> - Deleting...</em></span>
-                <span v-else-if="user.deleteError" class="text-danger"> - ERROR: {{user.deleteError}}</span>
-                <span v-else> - <a @click="deleteUser(user.id)" class="text-danger">Delete</a></span>
-            </li>
-        </ul>
-        <p>
-            <router-link to="/login">Logout</router-link>
-        </p>
+      <b-navbar toggleable="lg" type="dark" variant="dark">
+        <b-navbar-brand href="#">
+          <b-avatar
+            variant="info"
+            :src="'/static/' + account.user.roster_id + '.jpg'"
+          ></b-avatar>
+          吉大惠谷2020届1年27班
+        </b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <b-nav-form>
+              <b-form-input
+                size="sm"
+                class="mr-sm-2"
+                placeholder="Search"
+              ></b-form-input>
+              <b-button size="sm" class="my-2 my-sm-0" type="submit"
+                >Search</b-button
+              >
+            </b-nav-form>
+
+            <b-nav-item-dropdown right>
+              <!-- Using 'button-content' slot -->
+              <template v-slot:button-content>
+                <em>{{ account.user.fullname }}</em>
+              </template>
+              <b-dropdown-item href="/profile">
+                <i class="fas fa-user-cog"></i>个人信息
+              </b-dropdown-item>
+              <b-dropdown-item @click="logout">
+                <i class="fas fa-sign-out-alt"></i>退出
+              </b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
     </div>
+    <roster-page class="mt-3"></roster-page>
+  </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
+import RosterPage from "../roster/RosterPage.vue";
+import { userService } from "../_services";
 
 export default {
-    computed: {
-        ...mapState({
-            account: state => state.account,
-            users: state => state.users.all
-        })
+  components: {
+    RosterPage,
+  },
+  computed: {
+    ...mapState({
+      account: (state) => state.account,
+      users: (state) => state.users.all,
+    }),
+  },
+  created() {
+    // this.getAllUsers();
+  },
+  methods: {
+    ...mapActions("users", {
+      getAllUsers: "getAll",
+      deleteUser: "delete",
+    }),
+    logout() {
+      userService.logout();
+      this.$router.push("/login");
     },
-    created () {
-        this.getAllUsers();
-    },
-    methods: {
-        ...mapActions('users', {
-            getAllUsers: 'getAll',
-            deleteUser: 'delete'
-        })
-    }
+  },
 };
 </script>
