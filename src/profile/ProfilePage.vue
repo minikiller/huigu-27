@@ -19,6 +19,7 @@
                 ></b-img>
               </b-col>
                <b-col> 姓名： {{ account.user.fullname }} </b-col>
+               <b-col> <FormulateInput type="text" /> </b-col>
             </b-row>
           </b-container>
         </b-tab>

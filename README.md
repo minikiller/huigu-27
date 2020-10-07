@@ -1,5 +1,7 @@
 # vue-vuex-registration-login-example
 
-Vue + Vuex - User Registration and Login Tutorial & Example
+### another good resource for vuejs
 
-To see a demo and further details go to http://jasonwatmore.com/post/2018/07/14/vue-vuex-user-registration-and-login-tutorial-example
+1. https://surveyjs.io/Examples/Library?id=survey-quiz&platform=jQuery&theme=modern
+
+2. https://vueformulate.com/guide/#why-not
