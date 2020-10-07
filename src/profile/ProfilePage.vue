@@ -77,19 +77,14 @@ export default {
   name: "profile",
   data() {
     return {
-      avatar: null,
-      saving: false,
-      saved: true,
       user: null,
       password: "",
       confirm_password: "",
-      background: "",
     };
   },
   computed: {
     ...mapState({
       account: (state) => state.account,
-      games: (state) => state.games,
     }),
   },
   components: {},
