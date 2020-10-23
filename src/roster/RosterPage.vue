@@ -5,7 +5,7 @@
         <b-row>
           <div
             id="my-card"
-            v-for="(data, index) in share_items"
+            v-for="(data, index) in rosters"
             v-bind:key="index"
             style="margin: 0 auto"
           >
@@ -47,9 +47,15 @@
 <script>
 import config from "config";
 import { rosterService } from "../_services";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapState({
+      rosters: (state) => state.roster.rosters,
+    }),
+    ...mapGetters("roster", ["getRosters"])
+  },
   data() {
     return {
       name: "我的棋谱",
@@ -62,7 +68,7 @@ export default {
       comment: "",
       id: 0,
       items: [],
-      share_items: [],
+      // share_items: [],
     };
   },
   mounted() {
@@ -71,10 +77,12 @@ export default {
   },
   methods: {
     ...mapMutations("alert", ["SET_SPINNER"]),
+    ...mapMutations("roster", ["updateRosters"]),
     getall() {
       rosterService.getAll().then((data) => {
         console.log(data);
-        this.share_items = data;
+        // this.share_items = data;
+        this.updateRosters(data);
         this.SET_SPINNER(false);
       });
     },

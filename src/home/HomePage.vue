@@ -15,11 +15,12 @@
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-form>
+            <b-nav-form @submit.prevent="search">
               <b-form-input
                 size="sm"
                 class="mr-sm-2"
                 placeholder="Search"
+                v-model="searchText"
               ></b-form-input>
               <b-button size="sm" class="my-2 my-sm-0" type="submit"
                 >Search</b-button
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import RosterPage from "../roster/RosterPage.vue";
 import { userService } from "../_services";
 
@@ -55,10 +56,16 @@ export default {
   components: {
     RosterPage,
   },
+  data() {
+    return {
+      searchText: "",
+    };
+  },
   computed: {
     ...mapState({
       account: (state) => state.account,
       users: (state) => state.users.all,
+      rosters: (state) => state.roster.rosters,
     }),
   },
   created() {
@@ -69,9 +76,16 @@ export default {
       getAllUsers: "getAll",
       deleteUser: "delete",
     }),
+    ...mapMutations("roster", ["filterRosters"]),
+
     logout() {
       userService.logout();
       this.$router.push("/login");
+    },
+    search() {
+      // alert(this.searchText);
+        this.filterRosters(this.searchText);
+      
     },
   },
 };

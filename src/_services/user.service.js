@@ -5,6 +5,7 @@ export const userService = {
   login,
   logout,
   register,
+  changePassword,
   getAll,
   getById,
   update,
@@ -28,6 +29,18 @@ function login(username, password) {
 
       return user;
     });
+}
+
+function changePassword(password) {
+  const requestOptions = {
+    method: "POST",
+    headers: { ...authHeader(), "Content-Type": "application/json" },
+    body: JSON.stringify({ password: password }),
+  };
+
+  return fetch(`${config.apiUrl}/users/changepassword`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function logout() {
@@ -90,4 +103,3 @@ function _delete(id) {
     handleResponse
   );
 }
-
