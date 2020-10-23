@@ -39,7 +39,12 @@
 "
           >于馨雅</a
         >
-
+        <b-avatar variant="info" :src="'/static/1.jpg'"></b-avatar>
+        <a
+          href="http://aaa.votegoo.com/vote/frontend/joinner/party_id/14200/parent_id/6063/player_id/356059
+"
+          >陈梓桐</a
+        >
       </b-tab>
       <b-tab title="花名册">
         <b-row>
