@@ -1,7 +1,12 @@
 <template>
   <div>
     <b-tabs content-class="mt-3">
-      <b-tab active title="花名册">
+      <b-tab active title="投票">
+        <b-avatar variant="info" :src="'/static/27.jpg'"></b-avatar>
+        <a href="http://aaa.votegoo.com/vote/frontend/joinner/party_id/14246/parent_id/6095/player_id/356189/t/1603426535592"
+          >李煜婷</a>
+      </b-tab>
+      <b-tab title="花名册">
         <b-row>
           <div
             id="my-card"
@@ -38,9 +43,7 @@
       <b-tab title="课程表">
         <b-img src="/static/class.jpg" fluid alt="Responsive image"></b-img>
       </b-tab>
-      <b-tab title="投票">
-        <a href="http://aaa.votegoo.com/vote/frontend/joinner/party_id/14246/parent_id/6095/player_id/356189/t/1603426535592">李雨婷</a>
-      </b-tab>
+      
     </b-tabs>
   </div>
 </template>
@@ -54,7 +57,7 @@ export default {
     ...mapState({
       rosters: (state) => state.roster.rosters,
     }),
-    ...mapGetters("roster", ["getRosters"])
+    ...mapGetters("roster", ["getRosters"]),
   },
   data() {
     return {
