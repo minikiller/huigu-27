@@ -100,6 +100,7 @@ export default {
   },
   data() {
     return {
+      rawHtml: "",
       name: "我的棋谱",
       show: false,
       perPage: 10,
@@ -117,6 +118,9 @@ export default {
     this.SET_SPINNER(true);
     this.getall();
   },
+  created() {
+    this.getHtml();
+  },
   methods: {
     ...mapMutations("alert", ["SET_SPINNER"]),
     ...mapMutations("roster", ["updateRosters"]),
@@ -126,6 +130,12 @@ export default {
         // this.share_items = data;
         this.updateRosters(data);
         this.SET_SPINNER(false);
+      });
+    },
+    getHtml() {
+      rosterService.getHtml().then((data) => {
+        // this.share_items = data;
+        this.rawHtml = data;
       });
     },
   },
